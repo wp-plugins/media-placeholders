@@ -3,9 +3,9 @@
  * Plugin Name: Media Placeholders
  * Plugin URI:  http://github.com/x-team/wp-missing-upload-placeholders
  * Description: Redirect requests to non-existent uploaded images to a placeholder service like placehold.it or placekitten.com. For use during development.
- * Version:     0.9.1
+ * Version:     0.9.2
  * Author:      X-Team
- * Author URI:  http://x-team.com/
+ * Author URI:  http://x-team.com/wordpress/
  * License:     GPLv2+
  */
 
@@ -37,7 +37,7 @@ class Media_Placeholders {
 	 */
 	static function handle_missing_upload() {
 		global $wpdb;
-		$upload_dir = wp_upload_dir();
+		$upload_dir    = wp_upload_dir();
 		$base_url_path = parse_url( $upload_dir['baseurl'], PHP_URL_PATH );
 
 		// Checking for is_404() is not helpful as WordPress will load the attachment template
@@ -131,7 +131,13 @@ class Media_Placeholders {
 	 * @return string
 	 */
 	static function filter_placeholdit_image_url( $url, $args = '' ) {
-		extract( wp_parse_args( $args ) ); // => $attached_file, $width, $height, $attachment_id
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
 		$name_hash = md5( $attached_file );
 		$bgcolor   = substr( $name_hash, 0, 6 );
 		$fgcolor   = substr( $name_hash, 6, 6 );
@@ -151,7 +157,13 @@ class Media_Placeholders {
 	 * @return string
 	 */
 	static function filter_placekitten_color_image_url( $url, $args ) {
-		extract( wp_parse_args( $args ) ); // => $attached_file, $width, $height, $attachment_id
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
 		$url = "http://placekitten.com/$width/$height";
 		return $url;
 	}
@@ -163,7 +175,13 @@ class Media_Placeholders {
 	 * @return string
 	 */
 	static function filter_placekitten_grayscale_image_url( $url, $args ) {
-		extract( wp_parse_args( $args ) ); // => $attached_file, $width, $height, $attachment_id
+		extract( wp_parse_args( $args ) );
+		/**
+		 * @var string $attached_file
+		 * @var int $width
+		 * @var int $height
+		 * @var int $attachment_id
+		 */
 		$url = "http://placekitten.com/g/$width/$height";
 		return $url;
 	}
