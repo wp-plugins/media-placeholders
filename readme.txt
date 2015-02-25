@@ -1,5 +1,5 @@
 === Media Placeholders ===
-Contributors:      X-team, westonruter
+Contributors:      xwp, westonruter
 Tags:              placeholders, uploads, development, images, 404
 Requires at least: 3.5
 Tested up to:      3.6.1
